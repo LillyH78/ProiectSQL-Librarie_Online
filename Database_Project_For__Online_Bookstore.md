@@ -1,17 +1,17 @@
-<h1>Database Project for **Online bookstore**</h1>
+<h1>Database Project for Online bookstore</h1>
 
 The scope of this project is to use all the SQL knowledge gained throught the Software Testing course and apply them in practice.
 
-Application under test: **Online bookstore**
+Application under test: Online bookstore
 
 Tools used: MySQL Workbench
 
 Database description: 
-**The bookstore online has the purpose to sell books content on electronic format.
+The bookstore online has the purpose to sell books content on electronic format.
 There are so many books categories such : Books for kids, Personal development, IT.
 All the books are able to be ordered starting from Monday to saturday at every hour.
 The orders placed on a non working day it will be processed in the first working day.
-**
+
 
 <ol>
 <li>Database Schema </li>
@@ -21,12 +21,12 @@ You can find below the database schema that was generated through Reverse Engine
 The tables are connected in the following way:
 
 <ul>
-  <li> **BOOKS**  is connected with **ORDERED_BOOKS** through a **ONE TO MANY** relationship which was implemented through **BOOKS.BOOK_ID** as a primary key and **ORDERED_BOOKS.BOOK_ID** as a foreign key</li>
-  <li> **ORDERS**  is connected with **ORDERED_BOOKS** through a **ONE TO MANY** relationship which was implemented through **ORDERS.ORDERS_ID** as a primary key and **ORDERED.BOOKS.ORDERS_ID** as a foreign key</li>
-  <li> **CUSTOMERS**  is connected with **ORDERS_CUSTOMERS** through a **ONE TO MANY** relationship which was implemented through **CUSTOMERS.CUSTOMERS.ID** as a primary key and **ORDERS.COSTUMERS.CUSTOMERS_ID** as a foreign key</li>
-  <li> **ORDERS**  is connected with **ORDERS_CUSTOMERS** through a **ONE TO MANY** relationship which was implemented through **ORDERS.ORDER.ID** as a primary key and **ORDERS.COSTUMERS.ORDER_ID** as a foreign key</li>
- <li> **PAYMENT**  is connected with **ORDERS** through a **ONE TO MANY** relationship which was implemented through **PAYMENT.PAYMENT_METHOD_ID** as a primary key and **ORDERS.PAYMENT_TYPE** as a foreign key</li>
-  <li> **ORDERS**  is connected with **DELIVERY** through a **ONE TO MANY** relationship which was implemented through **ORDERS.ORDER.ID** as a primary key and **DELIVERY.ORDER_ID** as a foreign key</li>
+  <li> carti is connected with carti_comandate through a one to many relationship which was implemented through carti.id_carte as a primary key and carti_comandate.id_carte as a foreign key</li>
+  <li> comenzi  is connected with carti_comandate through a one to many relationship which was implemented through comenzi.id_comanda as a primary key and carti_comandate.id_comanda as a foreign key</li>
+  <li> clienti  is connected with comenzi_clienti through a one to many relationship which was implemented through clienti.id_client as a primary key and comenzi.clienti.id_client as a foreign key</li>
+  <li> comenzi  is connected with comenzi_clienti through a one to many relationship which was implemented through comenzi.id_comanda as a primary key and comenzi_clienti.id_comanda as a foreign key</li>
+  <li> plata  is connected with comenzi through a one to many relationship which was implemented through plata.id_modalitate_plata as a primary key and comenzi.tip_plata as a foreign key</li>
+  <li> comenzi  is connected with livrare through a one to many relationship which was implemented through comenzi.id_comanda as a primary key and livrare.id_comanda as a foreign key</li>
 </ul><br>
 
 <li>Database Queries</li><br>
