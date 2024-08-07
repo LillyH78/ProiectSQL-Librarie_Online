@@ -21,12 +21,12 @@ You can find below the database schema that was generated through Reverse Engine
 The tables are connected in the following way:
 
 <ul>
-  <li> carti is connected with carti_comandate through a one to many relationship which was implemented through carti.id_carte as a primary key and carti_comandate.id_carte as a foreign key</li>
-  <li> comenzi  is connected with carti_comandate through a one to many relationship which was implemented through comenzi.id_comanda as a primary key and carti_comandate.id_comanda as a foreign key</li>
-  <li> clienti  is connected with comenzi_clienti through a one to many relationship which was implemented through clienti.id_client as a primary key and comenzi.clienti.id_client as a foreign key</li>
-  <li> comenzi  is connected with comenzi_clienti through a one to many relationship which was implemented through comenzi.id_comanda as a primary key and comenzi_clienti.id_comanda as a foreign key</li>
-  <li> plata  is connected with comenzi through a one to many relationship which was implemented through plata.id_modalitate_plata as a primary key and comenzi.tip_plata as a foreign key</li>
-  <li> comenzi  is connected with livrare through a one to many relationship which was implemented through comenzi.id_comanda as a primary key and livrare.id_comanda as a foreign key</li>
+  <li> **carti** is connected with carti_comandate through a **one to many** relationship which was implemented through **carti.id_carte** as a primary key and **carti_comandate.id_carte** as a foreign key</li>
+  <li> **comenzi**  is connected with **carti_comandate** through a **one to many** relationship which was implemented through **comenzi.id_comanda** as a primary key and **carti_comandate.id_comanda** as a foreign key</li>
+  <li> **clienti**  is connected with **comenzi_clienti** through a **one to many** relationship which was implemented through **clienti.id_client** as a primary key and **comenzi.clienti.id_client** as a foreign key</li>
+  <li> **comenzi**  is connected with **comenzi_clienti** through a **one to many** relationship which was implemented through **comenzi.id_comanda** as a primary key and **comenzi_clienti.id_comanda** as a foreign key</li>
+  <li> **plata**  is connected with **comenzi** through a **one to many** relationship which was implemented through **plata.id_modalitate_plata** as a primary key and comenzi.tip_plata as a foreign key</li>
+  <li> **comenzi**  is connected with **livrare** through a **one to many** relationship which was implemented through **comenzi.id_comanda** as a primary key and **livrare.id_comanda** as a foreign key</li>
 </ul><br>
 
 <li>Database Queries</li><br>
@@ -37,64 +37,64 @@ The tables are connected in the following way:
 
   The following instructions were written in the scope of CREATING the structure of the database (CREATE INSTRUCTIONS)
     
-  CREATE DATABASE LIBRARIE_ONLINE;
+  * create database librarie_online;
+  * create table carti(
+    id_carte int primary key auto_increment,
+    denumire_carte varchar (40),
+    autor varchar (40),
+    pret int,
+    data_editiei date
+    );
 
-  CREATE TABLE CARTI (
-  ID_CARTE INT PRIMARY KEY AUTO_INCREMENT,
-  DENUMIRE_CARTE VARCHAR (40),
-  AUTOR VARCHAR (40),
-  PRET INT,
-  DATA_EDITIEI DATE
-  );
+  * create table clienti(
+    id_client int primary key auto_increment,
+    nume varchar (40),
+    prenume varchar (40),
+    adresa varchar (50),
+    telefon varchar(10)
+    );
+    
+  * create table comenzi(
+    id_comanda int not null auto_increment
+    cod_comanda varhar (20),
+    data_comanda date,
+    primary key (id_comanda)
+    );
 
-  CREATE TABLE CLIENTI (
-  ID_CLIENT INT PRIMARY KEY AUTO_INCREMENT,
-  NUME VARCHAR (40),
-  PRENUME VARCHAR (40),
-  ADRESA VARCHAR (50),
-  TELEFON VARCHAR (10)
-  );
-
-  CREATE TABLE COMENZI (
-  ID_COMANDA INT NOT NULL AUTO_INCREMENT,
-  COD_COMANDA VARCHAR (20),
-  DATA_COMANDA DATE,
-  PRIMARY KEY (ID_COMANDA)
-  );
-
-  CREATE TABLE CARTI_COMANDATE (
-  ID_COMANDA INT,
-  ID_CARTE INT,
-  CANTITATE INT,
-  foreign key (ID_COMANDA) references COMENZI (ID_COMANDA),
-  foreign key (ID_CARTE) references CARTI(ID_CARTE)
-  );
+  * create table carti_comandate(
+    id_comanda int,
+    id_carte int,
+    cantitate int
+    foreign key (id_comanda) references comenzi (id_comanda),
+    foreign key (id_carte) references carti(id_carte)
+    );
   
-  CREATE TABLE COMENZI_CLIENTI (
-  ID_COMANDA INT,
-  ID_CLIENT INT,
-  foreign key (ID_COMANDA) references COMENZI (ID_COMANDA),
-  foreign key (ID_CLIENT) references CLIENTI(ID_CLIENT)
-  );
+  * create table comenzi_clienti(
+    id_comanda int,
+    id_client int,
+    foreign key (id_comanda) references comenzi (id_comanda),
+    foreign key (id_client) references clienti(id_client)
+    );
   
-  CREATE TABLE PLATA (
-  ID_MODALITATE_PLATA INT PRIMARY KEY AUTO_INCREMENT,
-  MODALITATE_PLATA VARCHAR(10)
-  );
-
-  CREATE TABLE LIVRARE (
-  ID_LIVRARE INT NOT NULL AUTO_INCREMENT,
-  MOD_LIVRARE VARCHAR(30),
-  COST_TRANSPORT INT,
-  ID_COMANDA INT,
-  PRIMARY KEY (ID_LIVRARE),
-  CONSTRAINT FK_LIVRARE_COMENZI
-       FOREIGN KEY (ID_COMANDA) REFERENCES COMENZI(ID_COMANDA)
-  );
-
+  * create table plata(
+    id_modalitate_plata int primary key auto_increment,
+    modalitate_plata varchar(10)
+    );
+  
+  * create table livrare(
+    id_livrare int not null auto_increment,
+    mod_livrare varchar(30),
+    cost_transport int,
+    id_comanda int,
+    primary key (id_livrare),
+    constraint fk_livrare_comenzi
+         foreign key (id_comanda) references comenzi(id_comanda)
+    );
+  
+  
   After the database and the tables have been created, a few ALTER instructions were written in order to update the structure of the database, as described below:
 
-  # Modificare proprietate coloana MODALITATE_PLATA
+  * Modificare proprietate coloana MODALITATE_PLATA
   
   ALTER TABLE CARTI
   ADD COLUMN CATEGORII VARCHAR (20);
