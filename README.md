@@ -240,7 +240,7 @@ Database description: The bookstore online has the purpose to sell books content
                              (18, '581', '2024-06-02'),
                              (19, '603', '2024-06-25'),
                              (20, '623', '2024-06-30');
-            * insert into comenzi values (21, '647', '2024-07-10');
+          * insert into comenzi values (21, '647', '2024-07-10');
 
          * Adaugare coloana tip_plata in tabela comenzi
 
@@ -303,10 +303,10 @@ Database description: The bookstore online has the purpose to sell books content
                                (15, 'CURIER', '25', '15');
 
          * Adaugare date in tabela plata    
-            insert into plata values (1,'Cash'), (2, 'Card');
+            * insert into plata values (1,'Cash'), (2, 'Card');
    
-            insert into plata (modalitate_plata) values ('Cash'), ('Card');
-            insert into plata (modalitate_plata) values ('Card cadou');
+            * insert into plata (modalitate_plata) values ('Cash'), ('Card');
+            * insert into plata (modalitate_plata) values ('Card cadou');
        
          After the insert, in order to prepare the data to be better suited for the testing process, I updated some data in the following way:  
   
@@ -347,77 +347,77 @@ Database description: The bookstore online has the purpose to sell books content
        * set sql_safe_updates=0;
          delete from carti;
 
-         delete from carti
+       * delete from carti
          where id_client='16';
 
-          iii. DQL (Data Query Language) 
-               In order to simulate various scenarios that might happen in real life I created the following queries that would cover multiple potential real-life situations:
+       iii. DQL (Data Query Language) 
+         In order to simulate various scenarios that might happen in real life I created the following queries that would cover multiple potential real-life situations:
 
-          * Return all data from the books and customers tables
+         * Return all data from the books and customers tables
   
             ```sql
             select * from carti;  
             select * from clienti;
             ```
             
-          * Return book_id, category and book_name from books table
+        * Return book_id, category and book_name from books table
             
             ```sql
             select id_carte, categorie, denumire_carte from carti;
             ```
             
-          * Return customers who live in Bucharest
+        * Return customers who live in Bucharest
             
             ```sql
             select * from clienti
             where oras='bucuresti';
             ```
             
-          * Return books with a price higher than 20
+        * Return books with a price higher than 20
         
             ```sql
             select * from carti 
             where pret>20;
             ```
 
-          * Return books that have "rich" in their name
+        * Return books that have "rich" in their name
 
             ```sql
             select * from carti
             where denumire_carte like '%bogat%';
             ```
 
-          * Return books whose price starts with 1, is partially known and they are published in 2017
+        * Return books whose price starts with 1, is partially known and they are published in 2017
             
             ```sql
             select * from carti
             where pret like '1_' and an_editie like '%2017%';
             ```
 
-          * Return books whose price starts with 1, is partially known or they are published in 2017
+        * Return books whose price starts with 1, is partially known or they are published in 2017
         
             ```sql            
             select * from carti 
             where pret like '1_' or an_editie like '%2017%';
             ```
 
-          * Return books whose price starts with 1, is partially known and they are published in 2017 or 2018
+        * Return books whose price starts with 1, is partially known and they are published in 2017 or 2018
         
             ```sql
             select * from carti
             where pret like '1_' 
             and (an_editie = '2017'
-		or an_editie = '2018');
+		   or an_editie = '2018');
             ```
   
-          * Returning books whose name does not begin with "C"
+        * Returning books whose name does not begin with "C"
       
             ```sql
             select * from carti
             where denumire_carte not like 'C%';
             ```
 
-          * Returning books whose name starts with "C" in descending order 
+        * Returning books whose name starts with "C" in descending order 
 
             ```sql
             select * from carti
@@ -425,7 +425,7 @@ Database description: The bookstore online has the purpose to sell books content
             order by cod_carte desc;
             ```
   
-          * Returning books from the IT category, sorted in descending order with a limit of 5
+        * Returning books from the IT category, sorted in descending order with a limit of 5
 
             ```sql
             select * from carti 
@@ -434,21 +434,21 @@ Database description: The bookstore online has the purpose to sell books content
             limit 5;
             ```
 
-          * Returning the maximum price of the books
+        * Returning the maximum price of the books
 
             ```sql
             select max(pret)
             from carti;
             ```
 
-          * Returning the minimum price of the books
+        * Returning the minimum price of the books
 
             ```sql
             select min(pret)
             from carti;
             ```
 
-          * The return of the last order made by Zamfiroiu Alina
+        * The return of the last order made by Zamfiroiu Alina
 
             ```sql        
             select clienti.nume, clienti.prenume, min(data_comanda)
@@ -458,32 +458,32 @@ Database description: The bookstore online has the purpose to sell books content
             and prenume = 'alina';
             ```
 
-          * The return of all orders made by Zamfiroiu Alina
+        * The return of all orders made by Zamfiroiu Alina
 
             ```sql
-	    select clienti.nume, clienti.prenume, comenzi.id_comanda, comenzi.data_comanda
+            select clienti.nume, clienti.prenume, comenzi.id_comanda, comenzi.data_comanda
             from clienti
             join comenzi_clienti on clienti.id_client = comenzi_clienti.id_client
             join comenzi on comenzi_clienti.id_comanda = comenzi.id_comanda
             where nume = 'zamfiroiu'
             and prenume = 'alina';
-            ```
+            ```	    
 
-          * Returning the total number of books in the library
+        * Returning the total number of books in the library
 
             ```sql
             select count(*)
             from carti;
             ```
 
-          * Returning the average price of the books sold
+        * Returning the average price of the books sold
 
             ```sql
             select AVG(pret)
             from carti;
             ```
 
-          * Return of the average price for products in the IT and Personal Development category
+        * Return of the average price for products in the IT and Personal Development category
 
             ```sql            
             select categorie, avg(pret) 
@@ -491,28 +491,28 @@ Database description: The bookstore online has the purpose to sell books content
             group by categorie;
             ```
 
-          * Returning books from the IT category that have an average price below 50
+        * Returning books from the IT category that have an average price below 50
 
             ```sql
-	    select categorie, avg(pret)
+            select categorie, avg(pret)
             from carti 
             where categorie='it'
             group by categorie
             having avg(pret) < 50;
-            ```
+            ```	    
 
-          * Returning books for each customer
+        * Returning books for each customer
 
             ```sql
-	    select clienti.id_client, nume, prenume, count(id_carte) 
+            select clienti.id_client, nume, prenume, count(id_carte) 
             from clienti 
             join comenzi_clienti on comenzi_clienti.id_client = clienti.id_client
             join carti_comandate on comenzi_clienti.id_comanda = carti_comandate.id_comanda
             group by clienti.id_client, nume, prenume
             having count(id_carte) > 5;
-            ```
+            ```	    
 
-          * Returning the number of customers from each city (only cities that contain more than 2 customers)
+        * Returning the number of customers from each city (only cities that contain more than 2 customers)
 
             ```sql
             select count(id_client), oras
@@ -522,14 +522,14 @@ Database description: The bookstore online has the purpose to sell books content
             order by count(id_client) asc;
             ```
   
-          * Return of all ordered books
+        * Return of all ordered books
 
             ```sql      
             select * from carti c 
             join carti_comandate cc on c.id_carte = cc.id_comanda;
             ```
 
-          * Return of ordered and delivered books
+        * Return of ordered and delivered books
 
             ```sql
             select c.cod_carte, c.denumire_carte, l.mod_livrare
@@ -538,7 +538,7 @@ Database description: The bookstore online has the purpose to sell books content
             join livrare l on l.id_comanda = cc.id_comanda;
             ```
        
-          * The return of all the books that were ordered as well as those that were not ordered
+        * The return of all the books that were ordered as well as those that were not ordered
 
             ```sql
             select * from carti c 
@@ -554,7 +554,7 @@ Database description: The bookstore online has the purpose to sell books content
             cross join carti_comandate cc on c.id_carte = cc.id_carte;
             ```
  
-          * The return of the number of books ordered for each author
+        * The return of the number of books ordered for each author
 
             ```sql
             select c.autor, count(*)
@@ -563,7 +563,7 @@ Database description: The bookstore online has the purpose to sell books content
             group by c.autor;
             ```
 
-          * Return of all orders paid by cash
+        * Return of all orders paid by cash
 
             ```sql
             select * from comenzi
@@ -572,7 +572,7 @@ Database description: The bookstore online has the purpose to sell books content
 						 where modalitate_plata = 'cash');
             ```
  
-          * Return of all orders paid by Cash and Card
+        * Return of all orders paid by Cash and Card
 
             ```sql
             select * from comenzi
