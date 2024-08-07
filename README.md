@@ -10,7 +10,7 @@ Database description: The bookstore online has the purpose to sell books content
    1. Database Schema 
 
       You can find below the database schema that was generated through Reverse Engineer and which contains all the tables and the relationships between them.
-
+![image](https://github.com/user-attachments/assets/85670c6c-3381-43be-b803-d5ba10055ad1)
 
       The tables are connected in the following way:
 
