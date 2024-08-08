@@ -311,7 +311,7 @@ Database description: The bookstore online has the purpose to sell books content
          * Adding data to the payment table 
             * insert into plata values (1,'Cash'), (2, 'Card');
    
-     After the insert, in order to prepare the data to be better suited for the testing process, I updated some data in the following way:  
+      After the insert, in order to prepare the data to be better suited for the testing process, I updated some data in the following way:  
   
        * update carti
          set pret='40'
