@@ -14,11 +14,11 @@ Database description: The bookstore online has the purpose to sell books content
 
       The tables are connected in the following way:
 
-      * **carti** is connected with carti_comandate through a **one to many** relationship which was implemented through **carti.id_carte** as a primary key and **carti_comandate.id_carte** as a foreign key
+      * **carti** is connected with **carti_comandate** through a **one to many** relationship which was implemented through **carti.id_carte** as a primary key and **carti_comandate.id_carte** as a foreign key
       * **comenzi**  is connected with **carti_comandate** through a **one to many** relationship which was implemented through **comenzi.id_comanda** as a primary key and **carti_comandate.id_comanda** as a foreign key
-      * **clienti**  is connected with **comenzi_clienti** through a **one to many** relationship which was implemented through **clienti.id_client** as a primary key and **comenzi.clienti.id_client** as a foreign key
+      * **clienti**  is connected with **comenzi_clienti** through a **one to many** relationship which was implemented through **clienti.id_client** as a primary key and **comenzi_clienti.id_client** as a foreign key
       * **comenzi**  is connected with **comenzi_clienti** through a **one to many** relationship which was implemented through **comenzi.id_comanda** as a primary key and **comenzi_clienti.id_comanda** as a foreign key
-      * **plata**  is connected with **comenzi** through a **one to many** relationship which was implemented through **plata.id_modalitate_plata** as a primary key and comenzi.tip_plata as a foreign key
+      * **plata**  is connected with **comenzi** through a **one to many** relationship which was implemented through **plata.id_modalitate_plata** as a primary key and **comenzi.tip_plata** as a foreign key
       * **comenzi**  is connected with **livrare** through a **one to many** relationship which was implemented through **comenzi.id_comanda** as a primary key and **livrare.id_comanda** as a foreign key
 
    2. Database Queries
@@ -82,42 +82,43 @@ Database description: The bookstore online has the purpose to sell books content
         );
   
       After the database and the tables have been created, a few ALTER instructions were written in order to update the structure of the database, as described below:
-      * Modificare proprietate coloana modalitate_plata
+      
+      * Change the modality_payment column property
             
            * alter table plata
            modify modalitate_plata varchar (20);
 
-      * Adaugare coloana categorii in tabela carti
-
+      * Add categories column in the book table
+        
            * alter table carti
            add column categorii varchar (20);
 
-      * Stergere coloana categorii din tabela carti
+      * Deleting the categories column from the book table
   
            * alter table carti
            drop column categorii;
 
-      * Adaugare coloana cod_carte in tabela carti
+      * Adding the book_code column in the book table
   
            * alter table carti
            add column cod_carte varchar (10) after id_carte;
 
-      * Adaugare coloana categorie in tabela carti
+      * Add category column in the books table
   
            * alter table carti
            add column categorie varchar (20) after cod_carte;
 
-      * Adaugare coloana oras in tabela clienti
+      * Adding the city column in the customer table
   
            * alter table clienti
            add column oras varchar (20) after adresa;
 
-      * Modificare proprietate coloana data_editiei
+      * Change the edition_date column property
 
            * alter table carti
            modify data_editiei varchar (10);
 
-      * Modificare denumire coloana data editiei
+      * Change the name of the edition_date column
 
            * alter table carti change column data_editiei an_editie varchar (10);
                        
@@ -126,7 +127,7 @@ Database description: The bookstore online has the purpose to sell books content
 
         Below you can find all the insert instructions that were created in the scope of this project:
 
-        * Adaugare date in tabela CARTI
+        * Adding data to the books table
   
           * insert into carti (id_carte, cod_carte, categorie, denumire_carte, autor, pret, an_editie) 
           values (1, 9335529  , 'Carti pentru copii', 'Dumbrava minunata', 'Mihail Sadoveanu', '25', '2020');
@@ -136,7 +137,7 @@ Database description: The bookstore online has the purpose to sell books content
 
           * insert into carti (3, 5712614, 'Carti pentru copii', 'Print si cersetor', 'Mark Twain', '10', '2014');
 
-        * Modificare proprietate coloana DENUMIRE_CARTE
+        * Modify the book_name column property
 
           alter table carti
           modify denumire_carte varchar (100);
@@ -169,7 +170,7 @@ Database description: The bookstore online has the purpose to sell books content
                            (29, 3712159, 'IT', 'Conexiuni wireless cu Arduino', 'Mihai Todica', '46', '2021'), 
                            (30, 4624058, 'IT', 'Java de la 0 la expert', 'Stefan Tanasa', '149', '2011'); 
 
-        * Adaugare date in tabela CLIENTI
+        * Adding data to the clients table
 
           * insert into clienti (id_client, nume, prenume, adresa, oras, telefon)
             values (1, 'Ionescu', 'Maria', 'Str. Rozelor nr 3, Sector 3', 'Bucuresti', '0722354789');
@@ -208,11 +209,11 @@ Database description: The bookstore online has the purpose to sell books content
                              (29, 'Parvulescu', 'Mihaela', 'Str. Rapsodiei nr 15', 'Brasov', '0766325748', '16'),
                              (30, 'Popianu', 'Mihaela', 'Str. Aurel Vlaicu nr 9', 'Brasov', '0729335874', '15');
 
-        * Modificare denumire coloana cod_comanda
-
+        * Change the name of the order_code column
+          
           alter table comenzi change column cod_comanda nr_comanda varchar (10);
 
-        * Adaugare date in tabela comenzi
+        * Adding data to the orders table
 
           * insert into comenzi values (1, '100', '2024-02-03'),
 			     (2, '106', '2024-02-03'),
@@ -252,7 +253,7 @@ Database description: The bookstore online has the purpose to sell books content
             set id_comanda='19'
             where id_comanda=20;
          
-         * Adaugare date in tabela carti_comandate
+         * Adding data to the order_books table
    
            * insert into carti_comandate values (1, 1, 1),
                                       (2, 1, 1), (2, 2, 1), (2, 3, 1),
@@ -270,7 +271,7 @@ Database description: The bookstore online has the purpose to sell books content
                                       (14, 11, 1), (14, 12, 1), (14, 13, 1), (14, 14, 1), (14, 15, 1), (14, 16, 1),
                                       (15, 12, 1), (15, 13, 1), (15, 14, 1), (15, 15, 1), (15, 16, 1), (15, 17, 1);
 
-         * Adaugare date in tabela comenzi_clienti 
+         * Adding data to the customer_orders table 
     
            * insert into comenzi_clienti values (1, 1),
                                        (1, 2), (1, 3),
@@ -289,7 +290,7 @@ Database description: The bookstore online has the purpose to sell books content
                                        (14, 6), (14, 7), (14, 8), (14, 9), (14, 10), (14, 11), (14, 12),
                                        (15, 7), (15, 8), (15, 9), (15, 10), (15, 11), (15, 12), (15, 13);
 
-         * Adaugare date in tabela livrare
+         * Adding data to the delivery table
 
            * insert into livrare values (1, 'CURIER', '20', '1'),
                                (2, 'EASYBOX', '0', '2'),
@@ -307,13 +308,10 @@ Database description: The bookstore online has the purpose to sell books content
                                (14, 'CURIER', '25', '14'),
                                (15, 'CURIER', '25', '15');
 
-         * Adaugare date in tabela plata    
+         * Adding data to the payment table 
             * insert into plata values (1,'Cash'), (2, 'Card');
    
-            * insert into plata (modalitate_plata) values ('Cash'), ('Card');
-            * insert into plata (modalitate_plata) values ('Card cadou');
-       
-         After the insert, in order to prepare the data to be better suited for the testing process, I updated some data in the following way:  
+     After the insert, in order to prepare the data to be better suited for the testing process, I updated some data in the following way:  
   
        * update carti
          set pret='40'
@@ -547,7 +545,7 @@ Database description: The bookstore online has the purpose to sell books content
             inner join carti c on cc.id_carte = c.id_carte
             group by c.autor;
             ```
-        * Adaugare coloana tip_plata in tabela comenzi
+        * Adding the payment_type column in the orders table
 
             alter table comenzi add column tip_plata int;
             alter table comenzi add foreign key(tip_plata) references plata(id_modalitate_plata);
@@ -560,6 +558,11 @@ Database description: The bookstore online has the purpose to sell books content
              set tip_plata = 2
              where id_comanda >10; 
 
+        * Adding values ​​in the payment table
+	
+           * insert into plata (modalitate_plata) values ('Cash'), ('Card');
+           * insert into plata (modalitate_plata) values ('Card cadou');
+       
         * Return of all orders paid by cash
 
             ```sql
