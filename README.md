@@ -82,6 +82,10 @@ Database description: The bookstore online has the purpose to sell books content
         );
   
       After the database and the tables have been created, a few ALTER instructions were written in order to update the structure of the database, as described below:
+      * Modificare proprietate coloana modalitate_plata
+            
+           * alter table plata
+           modify modalitate_plata varchar (20);
 
       * Adaugare coloana categorii in tabela carti
 
@@ -113,21 +117,10 @@ Database description: The bookstore online has the purpose to sell books content
            * alter table carti
            modify data_editiei varchar (10);
 
-      * Modificare denumire coloana
+      * Modificare denumire coloana data editiei
 
            * alter table carti change column data_editiei an_editie varchar (10);
-
-      * Modificare proprietati coloane
-  
-           * alter table comenzi
-           modify id_comanda int auto_increment;
-
-           * alter table plata
-           modify modalitate_plata varchar (20);
-
-           * alter table carti
-           modify data_editiei varchar (10);
- 
+                       
        ii. DML (Data Manipulation Language)
         In order to be able to use the database I populated the tables with various data necessary in order to perform queries and manipulate the data. In the testing process, this necessary data is identified in the Test Design phase and created in the Test Implementation phase. 
 
@@ -240,13 +233,25 @@ Database description: The bookstore online has the purpose to sell books content
                              (18, '581', '2024-06-02'),
                              (19, '603', '2024-06-25'),
                              (20, '623', '2024-06-30');
+     
+             
+          * alter table comenzi
+            modify id_comanda int auto_increment;
+
           * insert into comenzi values (21, '647', '2024-07-10');
 
-         * Adaugare coloana tip_plata in tabela comenzi
+          * update comenzi
+            set id_comanda='17'
+            where id_comanda=18; 
 
-           alter table comenzi add column tip_plata int;
-           alter table comenzi add foreign key(tip_plata) references plata(id_modalitate_plata);
+          * update comenzi
+            set id_comanda='18'
+            where id_comanda=19;
 
+          * update comenzi
+            set id_comanda='19'
+            where id_comanda=20;
+         
          * Adaugare date in tabela carti_comandate
    
            * insert into carti_comandate values (1, 1, 1),
@@ -321,27 +326,7 @@ Database description: The bookstore online has the purpose to sell books content
        * update clienti
          set nume='MIRON'
          where id_client=15;
-
-       * update comenzi
-         set id_comanda='17'
-         where id_comanda=18; 
-
-       * update comenzi
-         set id_comanda='18'
-         where id_comanda=19;
-
-       * update comenzi
-         set id_comanda='19'
-         where id_comanda=20;
-
-       * update comenzi
-         set tip_plata = 1
-         where id_comanda <=10;   
-
-       * update comenzi
-         set tip_plata = 2
-         where id_comanda >10;  
-
+            
       After the testing process, I deleted the data that was no longer relevant in order to preserve the database clean: 
 
        * set sql_safe_updates=0;
@@ -562,6 +547,18 @@ Database description: The bookstore online has the purpose to sell books content
             inner join carti c on cc.id_carte = c.id_carte
             group by c.autor;
             ```
+        * Adaugare coloana tip_plata in tabela comenzi
+
+            alter table comenzi add column tip_plata int;
+            alter table comenzi add foreign key(tip_plata) references plata(id_modalitate_plata);
+
+           * update comenzi
+             set tip_plata = 1
+             where id_comanda <=10;   
+
+           * update comenzi
+             set tip_plata = 2
+             where id_comanda >10; 
 
         * Return of all orders paid by cash
 
